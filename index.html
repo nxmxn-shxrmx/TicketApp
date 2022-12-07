@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+   
+
+    <title>Ticket App</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .toolBOX {
+        height: 5rem;
+        background-color: #576573;
+        display: flex;
+        align-items: center;
+      }
+      .wet
+      {
+        background-color: white;
+      }
+
+      .toolBOX > * {
+        margin-left: 4rem;
+        border-radius: 2px;
+      }
+
+      .toolbox-priority-cont {
+        height: 3.5rem;
+        background-color: #26282a;
+        display: flex;
+        width: 15rem;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .action-btn-cont {
+        height: 3.5rem;
+        width: 6rem;
+        background-color: #26282a;
+        display: flex;
+      }
+
+      .action-btn-cont > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        width: 50%;
+        color: #c8d6e5;
+      }
+
+      .color {
+        height: 1.2rem;
+        width: 2rem;
+        background-color: #dfe4ea;
+        border-radius: 2px;
+      }
+
+      .lightpink {
+        border-top: 1px solid black;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        background-color: lightpink;
+      }
+
+      .lightblue {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        background-color: lightblue;
+      }
+
+      .lightgreen {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        background-color: lightgreen;
+      }
+
+      .black {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        background-color: black;
+      }
+
+      .action-btn-cont > *:hover {
+        background: white;
+      }
+
+      .modal-cont {
+        height: 50vh;
+        width: 45vw;
+        background-color: #576573;
+        position: absolute;
+        top: calc((100vh - 50vh) / 2);
+        left: calc((100vw - 45vw) / 2);
+        display: none;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+          rgba(0, 0, 0, 0.22) 0px 15px 12px;
+      }
+
+      .textarea-cont {
+    height: 100%;
+    width: 75%;
+    border: 20px solid rgb(193, 192, 192);
+    outline: none;
+    background-color: #fbfdff;
+    resize: none;
+    padding: 2rem;
+    font-size: 1.5rem;
+    color: black;
+}
+      textarea::-webkit-input-placeholder {
+        color: white;
+      }
+
+      .priority-colors-cont {
+    height: 100%;
+    width: 25%;
+    background-color: #2f3f4e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+      .priority-color {
+        height: 3rem;
+        width: 55%;
+      }
+
+      .border {
+        border: 5px solid #f5f6fa;
+      }
+
+      .ticket-cont {
+        height: 13rem;
+        width: 16rem;
+        background-color: #4b4b4b;
+      }
+
+      .ticket-color {
+        height: 1rem;
+      }
+
+      .ticket-id {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        height: 2rem;
+        background-color: #ffffff;
+        padding: 0.4rem;
+      }
+
+      .task-area {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        height: calc(100% - 1rem - 2rem - 2rem);
+        background-color: #e3dc9c;
+        padding: 0.4rem;
+        outline: none;
+      }
+
+      .ticket-lock {
+        height: 2rem;
+        display: flex;
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-bottom: 1px solid black;
+        background-color:#e3dc9c;
+        font-size: 1.5rem;
+        color: #4b4b4b;
+        padding-right: 1rem;
+        justify-content: flex-end;
+      }
+
+      
+      .main-cont {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2rem;
+        gap: 2rem;
+    
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolBOX">
+      <div class="toolbox-priority-cont">
+        <div class="lightpink color"></div>
+        <div class="lightblue color"></div>
+        <div class="lightgreen color"></div>
+        <div class="black color"></div>
+      </div>
+      <div class="action-btn-cont">
+        <div class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+        <div class="remove-btn">
+          <i class="fa-solid fa-trash"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-cont">
+
+    </div>
+
+    <div class="modal-cont">
+      <textarea
+        spellcheck="false"
+        class="textarea-cont"
+        placeholder=""
+      ></textarea>
+      <div class="priority-colors-cont">
+        <div class="lightpink priority-color"></div>
+        <div class="lightblue priority-color"></div>
+        <div class="lightgreen priority-color"></div>
+        <div class="black priority-color border"></div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
+    <script>
+      let as = document.querySelector(".add-btn");
+      let rs = document.querySelector(".remove-btn");
+      let ms = document.querySelector(".main-cont");
+      let mo = document.querySelector(".modal-cont");
+      let tet = document.querySelector(".textarea-cont");
+      let ali = document.querySelectorAll(".priority-color");
+      let tle = document.querySelectorAll(".color");
+
+      let co = ["lightpink", "lightblue", "lightgreen", "black"];
+      let modalP = co[co.length - 1];
+
+      let addFL = false;
+      let removeFL = false;
+
+      let lockCL = "fa-lock";
+      let unlockCL = "fa-lock-open";
+
+      let ticketArr = [];
+
+      if (localStorage.getItem("jira_tickets")) {
+        ticketArr = JSON.parse(localStorage.getItem("jira_tickets"));
+        ticketArr.forEach((ticketObj) => {
+          createTicket(
+            ticketObj.ticketColor,
+            ticketObj.ticketTask,
+            ticketObj.ticketID
+          );
+        });
+      }
+
+      for (let i = 0; i < tle.length; i++) {
+        tle[i].addEventListener("click", (e) => {
+          let currenttle = tle[i].classList[0];
+
+          let filteredTickets = ticketArr.filter((ticketObj, idx) => {
+            return currenttle === ticketObj.ticketColor;
+          });
+
+          //Remove previous tickets
+          let allTicketsCont = document.querySelectorAll(".ticket-cont");
+          for (let i = 0; i < allTicketsCont.length; i++) {
+            allTicketsCont[i].remove();
+          }
+
+     
+          filteredTickets.forEach((ticketObj, idx) => {
+            createTicket(
+              ticketObj.ticketColor,
+              ticketObj.ticketTask,
+              ticketObj.ticketID
+            );
+          });
+        });
+        tle[i].addEventListener("dblclick", (e) => {
+          let allTicketsCont = document.querySelectorAll(".ticket-cont");
+          for (let i = 0; i < allTicketsCont.length; i++) {
+            allTicketsCont[i].remove();
+          }
+          ticketArr.forEach((ticketObj, idx) => {
+            createTicket(
+              ticketObj.ticketColor,
+              ticketObj.ticketTask,
+              ticketObj.ticketID
+            );
+          });
+        });
+      }
+
+      //Listener for modal priority coloring
+      ali.forEach((ColorElem, idx) => {
+        ColorElem.addEventListener("click", (e) => {
+          ali.forEach((priorityColorElem, idx) => {
+            priorityColorElem.classList.remove("border");
+          });
+          ColorElem.classList.add("border");
+
+          modalP = ColorElem.classList[0];
+        });
+      });
+
+      as.addEventListener("click", (e) => {
+        //Display Modal
+        //Generate ticket
+
+        //addFL , true -> Modal Display
+        //addFL , false -> Modal None;
+        addFL = !addFL;
+        if (addFL) {
+          mo.style.display = "flex";
+        } else {
+          mo.style.display = "none";
+        }
+      });
+
+      rs.addEventListener("click", (e) => {
+        removeFL = !removeFL;
+        if(removeFL)
+        {
+            rs.classList.add("wet");
+        }
+        else
+        {
+            rs.classList.remove("wet");
+        }
+      });
+
+      mo.addEventListener("keydown", (e) => {
+        let key = e.key;
+        if (key === "Enter") {
+          createTicket(modalP, tet.value);
+          addFL = false;
+          setModalToDefault();
+        }
+      });
+
+      function createTicket(ticketColor, ticketTask, ticketID) {
+        let id = ticketID || shortid();
+        let ticketCont = document.createElement("div");
+        ticketCont.setAttribute("class", "ticket-cont");
+        ticketCont.innerHTML = `
+    <div class = "ticket-color ${ticketColor}"></div>
+    <div class="ticket-id">#${ticketID}</div>
+    <div class="task-area">${ticketTask}</div>
+    <div class="ticket-lock">
+        <i class="fa-solid "></i>
+    </div>
+    `;
+        ms.appendChild(ticketCont);
+
+        // create Object of ticket and add to array
+        if (!ticketID) {
+          ticketArr.push({ ticketColor, ticketTask, ticketID: id });
+          localStorage.setItem("jira_tickets", JSON.stringify(ticketArr));
+        }
+
+        handleRemoval(ticketCont, id);
+        handleLock(ticketCont, id);
+        handleColor(ticketCont, id);
+      }
+
+      function handleRemoval(ticket, id) {
+        //removeFL -> true -> remove
+        ticket.addEventListener("click", (e) => {
+          if (!removeFL) return;
+
+          let idx = getTicketIdx(id);
+          //DB removal
+          ticketArr.splice(idx, 1);
+          let strTicketArr = JSON.stringify(ticketArr);
+          localStorage.setItem("jira_tickets", strTicketArr);
+          ticket.remove(); // UI removal
+        });
+      }
+
+      function handleLock(ticket, id) {
+        let ticketLockElem = ticket.querySelector(".ticket-lock");
+        let ticketLock = ticketLockElem.children[0];
+        let ticketTaskArea = ticket.querySelector(".task-area");
+        ticketLock.addEventListener("click", (e) => {
+          let ticketIdx = getTicketIdx(id);
+          if (ticketLock.classList.contains(lockCL)) {
+            ticketLock.classList.remove(lockCL);
+            ticketLock.classList.add(unlockCL);
+            ticketTaskArea.setAttribute("contenteditable", "true");
+          } else {
+            ticketLock.classList.remove(unlockCL);
+            ticketLock.classList.add(lockCL);
+            ticketTaskArea.setAttribute("contentedittable", "true");
+          }
+          //Modify data in localStorage (Ticket Task)
+          ticketArr[ticketIdx].ticketTask = ticketTaskArea.innerText;
+          localStorag.setItem("jira_tickets", JSON.stringify(ticketArr));
+        });
+      }
+
+      function handleColor(ticket, id) {
+        let ticketColor = ticket.querySelector(".ticket-color");
+        ticketColor.addEventListener("click", (e) => {
+          // Get ticket index from the ticket array
+          let ticketIdx = getTicketIdx(id);
+
+          let currentTicketColor = ticketColor.classList[1];
+          // get ticket color idx
+          let currentTicketColorIdx = co.findIndex((color) => {
+            return currentTicketColor === color;
+          });
+          currentTicketColorIdx++;
+          let newTicketColorIdx = currentTicketColorIdx % co.length;
+          let newTicketColor = co[newTicketColorIdx];
+          ticketColor.classList.remove(currentTicketColor);
+          ticketColor.classList.add(newTicketColor);
+
+          ticketArr[ticketIdx].ticketColor = newTicketColor;
+          localStorage.setItem("jira_tickets", JSON.stringify(ticketArr));
+        });
+      }
+
+      function getTicketIdx(id) {
+        let ticketIdx = ticketArr.findIndex((ticketObj) => {
+          return ticketObj.ticketID == id;
+        });
+        return ticketIdx;
+      }
+
+      function setModalToDefault() {
+        mo.style.display = "none";
+        tet.value = "";
+        ali.forEach((priorityColorElem, idx) => {
+          priorityColorElem.classList.remove("border");
+        });
+        ali[ali.length - 1].classList.add("border");
+      }
+    </script>
+  </body>
+</html>
